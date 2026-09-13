@@ -1,7 +1,8 @@
 import { PrismaClient } from '@prisma/client';
 import { hashSync } from 'bcryptjs';
 
-const prisma = new PrismaClient();
+const connectionUrl = process.env.STORAGE_PRISMA_URL || process.env.STORAGE_URL || process.env.DATABASE_URL;
+const prisma = new PrismaClient(connectionUrl ? { datasourceUrl: connectionUrl } : undefined);
 
 async function main() {
   console.log('🌱 Seeding database...');
