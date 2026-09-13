@@ -1,0 +1,44 @@
+'use client';
+
+import { createContext, useContext, useEffect, useState, ReactNode } from 'react';
+
+type Theme = 'light' | 'dark';
+const ThemeContext = createContext<{ theme: Theme; toggleTheme: () => void }>({
+  theme: 'light',
+  toggleTheme: () => {},
+});
+
+export function useTheme() {
+  return useContext(ThemeContext);
+}
+
+export function ThemeProvider({ children }: { children: ReactNode }) {
+  const [theme, setTheme] = useState<Theme>('light');
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    const saved = localStorage.getItem('bekur-theme') as Theme;
+    if (saved) {
+      setTheme(saved);
+      document.documentElement.setAttribute('data-theme', saved);
+    }
+    setMounted(true);
+  }, []);
+
+  const toggleTheme = () => {
+    const next = theme === 'light' ? 'dark' : 'light';
+    setTheme(next);
+    localStorage.setItem('bekur-theme', next);
+    document.documentElement.setAttribute('data-theme', next);
+  };
+
+  if (!mounted) {
+    return <>{children}</>;
+  }
+
+  return (
+    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+      {children}
+    </ThemeContext.Provider>
+  );
+}

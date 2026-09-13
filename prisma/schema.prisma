@@ -1,0 +1,178 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  passwordHash String
+  name         String   @default("Admin")
+  role         String   @default("admin")
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model SiteSettings {
+  id                String  @id @default("main")
+  companyName       String  @default("BEKUR GENERAL TRADING PLC")
+  tagline           String  @default("Reliable infrastructure, innovative technologies, sustainable solutions, and strategic partnerships.")
+  logoUrl           String  @default("")
+  faviconUrl        String  @default("")
+  email             String  @default("bekurgeneraltradingplc@gmail.com")
+  phone1            String  @default("+251 946 757 671")
+  phone2            String  @default("+251 977 467 509")
+  whatsappNumber    String  @default("+251946757671")
+  whatsappMessage   String  @default("Hello Bekur General Trading PLC, I would like to learn more about your solutions and services.")
+  address           String  @default("")
+  mapEmbedUrl       String  @default("")
+  facebookUrl       String  @default("")
+  twitterUrl        String  @default("")
+  linkedinUrl       String  @default("")
+  instagramUrl      String  @default("")
+  youtubeUrl        String  @default("")
+  telegramUrl       String  @default("")
+  primaryCtaText    String  @default("PARTNER WITH BEKUR")
+  secondaryCtaText  String  @default("EXPLORE OUR BUSINESS")
+  contactCtaText    String  @default("TALK TO BEKUR")
+  footerText        String  @default("Reliable infrastructure, innovative technologies, sustainable solutions, and strategic partnerships.")
+  copyright         String  @default("© 2024 Bekur General Trading PLC. All rights reserved.")
+  privacyPolicyUrl  String  @default("")
+  termsUrl          String  @default("")
+  updatedAt         DateTime @updatedAt @default(now())
+}
+
+model HomepageSection {
+  id          String  @id @default(cuid())
+  sectionKey  String  @unique
+  title       String  @default("")
+  subtitle    String  @default("")
+  content     String  @default("")
+  imageUrl    String  @default("")
+  videoUrl    String  @default("")
+  ctaText     String  @default("")
+  ctaLink     String  @default("")
+  overlayOpacity Float @default(0.5)
+  enabled     Boolean @default(true)
+  sortOrder   Int     @default(0)
+  extraData   String  @default("{}")
+  updatedAt   DateTime @updatedAt @default(now())
+}
+
+model Sector {
+  id          String    @id @default(cuid())
+  title       String
+  slug        String    @unique
+  description String    @default("")
+  imageUrl    String    @default("")
+  iconName    String    @default("")
+  ctaText     String    @default("Learn More")
+  ctaLink     String    @default("")
+  enabled     Boolean   @default(true)
+  sortOrder   Int       @default(0)
+  fullContent String    @default("")
+  heroImageUrl String   @default("")
+  seoTitle    String    @default("")
+  seoDesc     String    @default("")
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  products    Product[]
+}
+
+model Product {
+  id            String   @id @default(cuid())
+  name          String
+  slug          String   @unique
+  description   String   @default("")
+  imageUrl      String   @default("")
+  images        String   @default("[]")
+  techInfo      String   @default("")
+  pdfUrl        String   @default("")
+  ctaText       String   @default("Inquire Now")
+  enabled       Boolean  @default(true)
+  sortOrder     Int      @default(0)
+  sectorId      String?
+  sector        Sector?  @relation(fields: [sectorId], references: [id], onDelete: SetNull)
+  seoTitle      String   @default("")
+  seoDesc       String   @default("")
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model Partner {
+  id          String   @id @default(cuid())
+  name        String
+  logoUrl     String   @default("")
+  description String   @default("")
+  website     String   @default("")
+  enabled     Boolean  @default(true)
+  sortOrder   Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Testimonial {
+  id           String   @id @default(cuid())
+  quote        String
+  author       String   @default("")
+  organization String   @default("")
+  imageUrl     String   @default("")
+  enabled      Boolean  @default(true)
+  sortOrder    Int      @default(0)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model CoreValue {
+  id          String   @id @default(cuid())
+  number      String   @default("01")
+  title       String
+  description String   @default("")
+  iconName    String   @default("")
+  sortOrder   Int      @default(0)
+  updatedAt   DateTime @updatedAt @default(now())
+}
+
+model Page {
+  id          String   @id @default(cuid())
+  title       String
+  slug        String   @unique
+  content     String   @default("")
+  heroImageUrl String  @default("")
+  published   Boolean  @default(false)
+  sortOrder   Int      @default(0)
+  seoTitle    String   @default("")
+  seoDesc     String   @default("")
+  seoKeywords String   @default("")
+  ogTitle     String   @default("")
+  ogDesc      String   @default("")
+  ogImage     String   @default("")
+  canonical   String   @default("")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Media {
+  id        String   @id @default(cuid())
+  filename  String
+  url       String
+  altText   String   @default("")
+  type      String   @default("image")
+  size      Int      @default(0)
+  createdAt DateTime @default(now())
+}
+
+model ContactMessage {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  phone     String   @default("")
+  subject   String   @default("")
+  message   String
+  status    String   @default("unread")
+  createdAt DateTime @default(now())
+}
