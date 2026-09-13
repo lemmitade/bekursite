@@ -38,13 +38,12 @@ export default async function FuturePage() {
             </div>
             <div>
               <div className="intro__image-wrapper">
-                <div style={{
-                  width: '100%', height: '100%',
-                  background: 'linear-gradient(135deg, #0B1F3A, #1E3350)',
-                  display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  color: 'rgba(243,188,62,0.12)',
-                  fontFamily: 'var(--font-heading)', fontSize: '6rem', fontWeight: 700,
-                }}>→</div>
+                <img
+                  src={section?.imageUrl || '/images/future-expansion.jpg'}
+                  alt="Bekur Future Expansion"
+                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                />
+                <div className="intro__image-accent" />
               </div>
             </div>
           </div>

@@ -25,11 +25,16 @@ async function main() {
   // Site Settings
   await prisma.siteSettings.upsert({
     where: { id: 'main' },
-    update: {},
+    update: {
+      logoUrl: '/images/logo-light.png',
+      faviconUrl: '/images/logo.png',
+    },
     create: {
       id: 'main',
       companyName: 'BEKUR GENERAL TRADING PLC',
       tagline: 'Reliable infrastructure, innovative technologies, sustainable solutions, and strategic partnerships.',
+      logoUrl: '/images/logo-light.png',
+      faviconUrl: '/images/logo.png',
       email: 'bekurgeneraltradingplc@gmail.com',
       phone1: '+251 946 757 671',
       phone2: '+251 977 467 509',

@@ -23,8 +23,18 @@ async function main() {
 
   // Update Sectors with images
   await prisma.sector.updateMany({
+    where: { slug: 'infrastructure-solutions' },
+    data: { imageUrl: '/images/sectors/infrastructure-solutions.jpg' },
+  });
+
+  await prisma.sector.updateMany({
     where: { slug: 'lighting-technologies' },
     data: { imageUrl: '/images/sectors/lighting-technologies.jpg' },
+  });
+
+  await prisma.sector.updateMany({
+    where: { slug: 'urban-development' },
+    data: { imageUrl: '/images/sectors/urban-development.jpg' },
   });
 
   await prisma.sector.updateMany({
@@ -33,13 +43,32 @@ async function main() {
   });
 
   await prisma.sector.updateMany({
-    where: { slug: 'infrastructure-solutions' },
-    data: { imageUrl: '/images/sectors/infrastructure-solutions.jpg' },
+    where: { slug: 'coffee-trading-export' },
+    data: { imageUrl: '/images/sectors/coffee-trading-export.jpg' },
   });
 
   await prisma.sector.updateMany({
-    where: { slug: 'urban-development' },
-    data: { imageUrl: '/images/future-expansion.jpg' },
+    where: { slug: 'procurement-supply' },
+    data: { imageUrl: '/images/sectors/procurement-supply.jpg' },
+  });
+
+  await prisma.sector.updateMany({
+    where: { slug: 'entertainment-recreation' },
+    data: { imageUrl: '/images/sectors/entertainment-recreation.jpg' },
+  });
+
+  await prisma.sector.updateMany({
+    where: { slug: 'strategic-investments' },
+    data: { imageUrl: '/images/sectors/strategic-investments.jpg' },
+  });
+
+  // Update SiteSettings logo
+  await prisma.siteSettings.updateMany({
+    where: { id: 'main' },
+    data: {
+      logoUrl: '/images/logo-light.png',
+      faviconUrl: '/images/logo.png',
+    },
   });
 
   // Update Products

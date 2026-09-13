@@ -89,13 +89,21 @@ export default async function SectorDetailPage({ params }: { params: Promise<{ s
               {products.map(product => (
                 <Link href={`/solutions/${product.slug}`} key={product.id} className="product-card">
                   <div className="product-card__image">
-                    <div style={{
-                      width: '100%', height: '100%',
-                      background: 'linear-gradient(135deg, #0B1F3A, #132640)',
-                      display: 'flex', alignItems: 'center', justifyContent: 'center',
-                      color: 'rgba(243,188,62,0.2)',
-                      fontFamily: 'var(--font-heading)', fontSize: '2rem', fontWeight: 600,
-                    }}>{product.name}</div>
+                    {product.imageUrl ? (
+                      <img
+                        src={product.imageUrl}
+                        alt={product.name}
+                        style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                      />
+                    ) : (
+                      <div style={{
+                        width: '100%', height: '100%',
+                        background: 'linear-gradient(135deg, #0B1F3A, #132640)',
+                        display: 'flex', alignItems: 'center', justifyContent: 'center',
+                        color: 'rgba(243,188,62,0.2)',
+                        fontFamily: 'var(--font-heading)', fontSize: '2rem', fontWeight: 600,
+                      }}>{product.name}</div>
+                    )}
                   </div>
                   <div className="product-card__body">
                     <span className="label">Product</span>
