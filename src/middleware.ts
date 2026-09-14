@@ -6,13 +6,15 @@ export function middleware(request: NextRequest) {
 
   // Protect admin routes
   if (pathname.startsWith('/admin')) {
-    const token =
-      request.cookies.get('authjs.session-token')?.value ||
-      request.cookies.get('__Secure-authjs.session-token')?.value ||
-      request.cookies.get('next-auth.session-token')?.value ||
-      request.cookies.get('__Secure-next-auth.session-token')?.value;
+    const hasToken = request.cookies
+      .getAll()
+      .some(
+        (c) =>
+          c.name.toLowerCase().includes('session-token') &&
+          Boolean(c.value)
+      );
 
-    if (!token) {
+    if (!hasToken) {
       const loginUrl = new URL('/login', request.url);
       loginUrl.searchParams.set('callbackUrl', pathname);
       return NextResponse.redirect(loginUrl);
