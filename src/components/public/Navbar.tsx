@@ -19,6 +19,7 @@ const navLinks = [
   { href: '/about', label: 'About' },
   { href: '/sectors', label: 'Sectors' },
   { href: '/solutions', label: 'Solutions' },
+  { href: '/sister-companies', label: 'Sister Companies' },
   { href: '/partnerships', label: 'Partnerships' },
   { href: '/future', label: 'Future' },
   { href: '/contact', label: 'Contact' },

@@ -1,21 +1,45 @@
 import prisma from '@/lib/prisma';
 import ContactForm from '@/components/public/ContactForm';
+import ContactSocialLinks from '@/components/public/ContactSocialLinks';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Contact | BEKUR General Trading PLC',
-  description: 'Get in touch with Bekur General Trading PLC. Contact us for infrastructure solutions, technology partnerships, and business inquiries.',
+  description: 'Get in touch with Bekur General Trading PLC. Contact us for infrastructure solutions, technology partnerships, social media channels, and business inquiries.',
 };
 
 export default async function ContactPage() {
   let settings: any = null;
+  let tiktokSection: any = null;
+
   try {
-    settings = await prisma.siteSettings.findFirst({ where: { id: 'main' } });
+    [settings, tiktokSection] = await Promise.all([
+      prisma.siteSettings.findFirst({ where: { id: 'main' } }),
+      prisma.homepageSection.findUnique({ where: { sectionKey: 'tiktok_videos' } }),
+    ]);
   } catch {}
+
+  let tiktokUrl = 'https://www.tiktok.com/@bekurtrading';
+  if (tiktokSection?.extraData) {
+    try {
+      const parsed = JSON.parse(tiktokSection.extraData);
+      if (parsed.accountUrl) tiktokUrl = parsed.accountUrl;
+    } catch {}
+  }
 
   const whatsappNumber = settings?.whatsappNumber || '+251946757671';
   const whatsappMessage = settings?.whatsappMessage || '';
   const whatsappUrl = `https://wa.me/${whatsappNumber.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(whatsappMessage)}`;
+
+  const socialSettings = {
+    tiktokUrl,
+    telegramUrl: settings?.telegramUrl || 'https://t.me/bekurtrading',
+    linkedinUrl: settings?.linkedinUrl || 'https://www.linkedin.com/company/bekur-general-trading',
+    instagramUrl: settings?.instagramUrl || 'https://www.instagram.com/bekurtrading',
+    facebookUrl: settings?.facebookUrl || 'https://www.facebook.com/bekurgeneraltrading',
+    youtubeUrl: settings?.youtubeUrl || 'https://www.youtube.com/@bekurgeneraltrading',
+    whatsappNumber,
+  };
 
   return (
     <>
@@ -27,7 +51,7 @@ export default async function ContactPage() {
           </div>
           <span className="label">Get In Touch</span>
           <h1>Talk to Bekur</h1>
-          <p className="page-hero__desc">We&apos;d love to hear from you. Reach out for partnerships, inquiries, or project discussions.</p>
+          <p className="page-hero__desc">We&apos;d love to hear from you. Reach out for partnerships, inquiries, social channels, or project discussions.</p>
         </div>
       </section>
 
@@ -105,6 +129,9 @@ export default async function ContactPage() {
               <ContactForm />
             </div>
           </div>
+
+          {/* Social Media Channels Hub */}
+          <ContactSocialLinks settings={socialSettings} />
         </div>
       </section>
     </>

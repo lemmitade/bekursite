@@ -4,17 +4,29 @@ import Footer from '@/components/public/Footer';
 
 export default async function PublicLayout({ children }: { children: React.ReactNode }) {
   let settings;
+  let tiktokSection;
   let sectors: { title: string; slug: string }[] = [];
 
   try {
-    settings = await prisma.siteSettings.findFirst({ where: { id: 'main' } });
-    sectors = await prisma.sector.findMany({
-      where: { enabled: true },
-      select: { title: true, slug: true },
-      orderBy: { sortOrder: 'asc' },
-    });
+    [settings, tiktokSection, sectors] = await Promise.all([
+      prisma.siteSettings.findFirst({ where: { id: 'main' } }),
+      prisma.homepageSection.findUnique({ where: { sectionKey: 'tiktok_videos' } }),
+      prisma.sector.findMany({
+        where: { enabled: true },
+        select: { title: true, slug: true },
+        orderBy: { sortOrder: 'asc' },
+      }),
+    ]);
   } catch {
     // DB might not be ready yet
+  }
+
+  let tiktokUrl = 'https://www.tiktok.com/@bekurtrading';
+  if (tiktokSection?.extraData) {
+    try {
+      const parsed = JSON.parse(tiktokSection.extraData);
+      if (parsed.accountUrl) tiktokUrl = parsed.accountUrl;
+    } catch {}
   }
 
   const navSettings = {
@@ -37,6 +49,7 @@ export default async function PublicLayout({ children }: { children: React.React
     twitterUrl: settings?.twitterUrl || '',
     instagramUrl: settings?.instagramUrl || '',
     telegramUrl: settings?.telegramUrl || '',
+    tiktokUrl,
   };
 
   return (

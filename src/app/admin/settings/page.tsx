@@ -22,6 +22,8 @@ interface SettingsData {
   facebookUrl: string;
   telegramUrl: string;
   instagramUrl: string;
+  youtubeUrl: string;
+  tiktokUrl: string;
 }
 
 export default function AdminSettingsPage() {
@@ -49,6 +51,8 @@ export default function AdminSettingsPage() {
     facebookUrl: '',
     telegramUrl: '',
     instagramUrl: '',
+    youtubeUrl: '',
+    tiktokUrl: '',
   });
 
   useEffect(() => {
@@ -79,6 +83,8 @@ export default function AdminSettingsPage() {
             facebookUrl: data.facebookUrl || '',
             telegramUrl: data.telegramUrl || '',
             instagramUrl: data.instagramUrl || '',
+            youtubeUrl: data.youtubeUrl || '',
+            tiktokUrl: data.tiktokUrl || 'https://www.tiktok.com/@bekurtrading',
           });
         }
         setLoading(false);
@@ -351,6 +357,50 @@ export default function AdminSettingsPage() {
                 value={formData.twitterUrl}
                 onChange={handleChange}
                 className="form-input"
+              />
+            </div>
+          </div>
+
+          <div className="form-row" style={{ marginTop: 'var(--space-4)' }}>
+            <div className="form-group">
+              <label htmlFor="tiktokUrl" style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                <span style={{ color: '#fe2c55', fontWeight: 'bold' }}>TikTok</span> Profile URL
+              </label>
+              <input
+                id="tiktokUrl"
+                name="tiktokUrl"
+                type="url"
+                value={formData.tiktokUrl}
+                onChange={handleChange}
+                className="form-input"
+                placeholder="https://www.tiktok.com/@bekurtrading"
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="instagramUrl">Instagram Profile URL</label>
+              <input
+                id="instagramUrl"
+                name="instagramUrl"
+                type="url"
+                value={formData.instagramUrl}
+                onChange={handleChange}
+                className="form-input"
+                placeholder="https://instagram.com/..."
+              />
+            </div>
+          </div>
+
+          <div className="form-row" style={{ marginTop: 'var(--space-4)' }}>
+            <div className="form-group">
+              <label htmlFor="youtubeUrl">YouTube Channel URL</label>
+              <input
+                id="youtubeUrl"
+                name="youtubeUrl"
+                type="url"
+                value={formData.youtubeUrl}
+                onChange={handleChange}
+                className="form-input"
+                placeholder="https://youtube.com/@..."
               />
             </div>
           </div>

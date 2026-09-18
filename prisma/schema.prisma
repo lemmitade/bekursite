@@ -176,3 +176,17 @@ model ContactMessage {
   status    String   @default("unread")
   createdAt DateTime @default(now())
 }
+
+model SisterCompany {
+  id          String   @id @default(cuid())
+  name        String
+  slug        String   @unique
+  tagline     String   @default("")
+  description String   @default("")
+  imageUrl    String   @default("")
+  website     String   @default("")
+  enabled     Boolean  @default(true)
+  sortOrder   Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
