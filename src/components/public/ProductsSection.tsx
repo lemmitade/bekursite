@@ -22,6 +22,14 @@ interface ProductsSectionProps {
   whatsappMessage: string;
 }
 
+const DEFAULT_PRODUCT_IMAGES: Record<string, string> = {
+  'smart-pole-solutions': '/images/products/smart-pole.jpg',
+  'garden-pole-systems': '/images/products/garden-pole.jpg',
+  'charger-box-stations': '/images/products/charger-box.jpg',
+  'high-mast-lighting': '/images/products/high-mast-lighting.jpg',
+  'sports-field-lighting': '/images/products/sports-field-lighting.jpg',
+};
+
 // Meta mapping to enrich product display directly from the catalog brochures
 const productMeta: Record<string, {
   category: string;
@@ -129,7 +137,7 @@ export default function ProductsSection({
               <div className="product-showcase__media">
                 <div className="product-showcase__image-wrap">
                   <img
-                    src={activeProduct.imageUrl || '/images/hero-infrastructure.jpg'}
+                    src={activeProduct.imageUrl || DEFAULT_PRODUCT_IMAGES[activeProduct.slug] || '/images/products/smart-pole.jpg'}
                     alt={activeProduct.name}
                     className="product-showcase__img"
                   />

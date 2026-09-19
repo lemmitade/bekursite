@@ -87,6 +87,14 @@ const productMeta: Record<string, {
   },
 };
 
+const DEFAULT_PRODUCT_IMAGES: Record<string, string> = {
+  'smart-pole-solutions': '/images/products/smart-pole.jpg',
+  'garden-pole-systems': '/images/products/garden-pole.jpg',
+  'charger-box-stations': '/images/products/charger-box.jpg',
+  'high-mast-lighting': '/images/products/high-mast-lighting.jpg',
+  'sports-field-lighting': '/images/products/sports-field-lighting.jpg',
+};
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   try {
@@ -101,16 +109,23 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 }
 
-export default async function ProductDetailPage({ params }: Props) {
+export default async function SolutionDetailPage({ params }: Props) {
   const { slug } = await params;
-  let product: any = null;
-  let settings: any = null;
+  let product;
+  let settings;
   try {
-    product = await prisma.product.findUnique({ where: { slug }, include: { sector: true } });
-    settings = await prisma.siteSettings.findFirst({ where: { id: 'main' } });
+    [product, settings] = await Promise.all([
+      prisma.product.findUnique({
+        where: { slug },
+        include: { sector: true },
+      }),
+      prisma.siteSettings.findFirst({ where: { id: 'main' } }),
+    ]);
   } catch {}
 
   if (!product) notFound();
+
+  const fallbackImg = DEFAULT_PRODUCT_IMAGES[slug] || '/images/hero-infrastructure.jpg';
 
   const meta = productMeta[slug] || {
     category: product.sector?.title || 'Infrastructure Solution',
@@ -118,7 +133,7 @@ export default async function ProductDetailPage({ params }: Props) {
     applications: ['Industrial', 'Urban Infrastructure', 'Commercial Environments'],
     benefits: ['Energy Efficient', 'Durable Construction', 'Superior Reliability'],
     specDetails: [],
-    catalogSheet: product.imageUrl || '/images/hero-infrastructure.jpg',
+    catalogSheet: product.imageUrl || fallbackImg,
   };
 
   const whatsappNumber = settings?.whatsappNumber || '+251946757671';
@@ -148,7 +163,7 @@ export default async function ProductDetailPage({ params }: Props) {
             <div>
               <div className="intro__image-wrapper" style={{ borderRadius: 'var(--radius-md)', overflow: 'hidden', border: '1px solid var(--border-color)' }}>
                 <img
-                  src={product.imageUrl || '/images/hero-infrastructure.jpg'}
+                  src={product.imageUrl || fallbackImg}
                   alt={product.name}
                   style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                 />

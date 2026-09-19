@@ -209,6 +209,70 @@ const DEFAULT_TIKTOK_VIDEOS: TikTokVideo[] = [
   },
 ];
 
+const DEFAULT_SECTORS: any[] = [
+  { id: 'sec-1', title: 'Infrastructure Solutions', slug: 'infrastructure-solutions', description: 'Delivering robust infrastructure solutions for government institutions, commercial developments, and public projects across Ethiopia.', imageUrl: '/images/sectors/infrastructure-solutions.jpg', sortOrder: 0 },
+  { id: 'sec-2', title: 'Lighting Technologies', slug: 'lighting-technologies', description: 'Advanced lighting systems for urban environments, industrial facilities, and public infrastructure projects.', imageUrl: '/images/sectors/lighting-technologies.jpg', sortOrder: 1 },
+  { id: 'sec-3', title: 'Urban Development Solutions', slug: 'urban-development', description: 'Comprehensive urban development services shaping modern, sustainable, and livable cities.', imageUrl: '/images/sectors/urban-development.jpg', sortOrder: 2 },
+  { id: 'sec-4', title: 'Smart City Technologies', slug: 'smart-city-technologies', description: 'Innovative smart city solutions integrating technology, connectivity, and sustainable urban planning.', imageUrl: '/images/sectors/smart-city-technologies.jpg', sortOrder: 3 },
+  { id: 'sec-5', title: 'Coffee Trading & Export', slug: 'coffee-trading-export', description: 'Premium Ethiopian coffee sourcing, processing, and export to international markets.', imageUrl: '/images/sectors/coffee-trading-export.jpg', sortOrder: 4 },
+  { id: 'sec-6', title: 'Procurement & Supply', slug: 'procurement-supply', description: 'Professional procurement and supply chain management for government and private sector organizations.', imageUrl: '/images/sectors/procurement-supply.jpg', sortOrder: 5 },
+  { id: 'sec-7', title: 'Entertainment & Recreation', slug: 'entertainment-recreation', description: 'Creating world-class entertainment and recreational facilities for communities and businesses.', imageUrl: '/images/sectors/entertainment-recreation.jpg', sortOrder: 6 },
+  { id: 'sec-8', title: 'Strategic Investments', slug: 'strategic-investments', description: 'Identifying and investing in high-growth opportunities across diverse sectors in Ethiopia and beyond.', imageUrl: '/images/sectors/strategic-investments.jpg', sortOrder: 7 },
+];
+
+const DEFAULT_PRODUCTS: any[] = [
+  {
+    id: 'prod-1',
+    name: 'Smart Pole Solutions',
+    slug: 'smart-pole-solutions',
+    description: 'Smarter cities. Brighter tomorrows. Engineered for sustainable, connected, and people-friendly urban environments with integrated IoT capabilities.',
+    imageUrl: '/images/products/smart-pole.jpg',
+    images: '["/images/products/smart-pole.jpg", "/images/products/catalog/smart-pole-sheet.jpg"]',
+    techInfo: 'Smart Adaptive Lighting • IoT Ready Architecture • Modern Urban Geometric Cantilever Design • Recessed Blue LED Accent Channel • Safe & Durable Anchor Base • Energy Efficient Operation',
+    sortOrder: 0,
+  },
+  {
+    id: 'prod-2',
+    name: 'Garden Pole Solutions',
+    slug: 'garden-pole-systems',
+    description: 'Garden Pole solutions combine sleek modern aesthetics and precision functionality to illuminate outdoor spaces, landscaped pathways, and public plazas.',
+    imageUrl: '/images/products/garden-pole.jpg',
+    images: '["/images/products/garden-pole.jpg", "/images/products/catalog/garden-pole-sheet.jpg"]',
+    techInfo: 'Modern Geometric Square Luminaire • Precision Optics • Custom Heights Available • Durable Structure • Sturdy Base Foundation • Recessed Blue Accent LED Strip • Long Service Life',
+    sortOrder: 1,
+  },
+  {
+    id: 'prod-3',
+    name: 'Charger Box Stations',
+    slug: 'charger-box-stations',
+    description: 'The Charger Box provides convenient, reliable, and weather-resistant public and commercial electric vehicle and device charging solutions.',
+    imageUrl: '/images/products/charger-box.jpg',
+    images: '["/images/products/charger-box.jpg", "/images/products/catalog/charger-box-sheet.jpg"]',
+    techInfo: 'Clean Architectural Tower • Illuminated Overhead LED Canopy • USB-A Ports • USB-C Fast Charging • Optional Wireless Charging • Heavy-Duty Cable Holders • Weather Resistant (IP65+) • Smart Monitoring Capability',
+    sortOrder: 2,
+  },
+  {
+    id: 'prod-4',
+    name: 'High Mast Lighting Systems',
+    slug: 'high-mast-lighting',
+    description: 'High Mast Lighting systems deliver powerful, wide-area illumination for large-scale environments including highways, airports, logistics centers, and ports.',
+    imageUrl: '/images/products/high-mast-lighting.jpg',
+    images: '["/images/products/high-mast-lighting.jpg", "/images/products/catalog/high-mast-lighting-sheet.jpg"]',
+    techInfo: 'High-Performance LED Floodlight Arrays • Circular Crown Ring Design • Custom Heights Available (15m–40m) • Safe Maintenance Access Ladder • Durable Engineered Base Structure • Reduced Maintenance Overhead',
+    sortOrder: 3,
+  },
+  {
+    id: 'prod-5',
+    name: 'Sports Field Lighting',
+    slug: 'sports-field-lighting',
+    description: 'Professional sports lighting solutions designed for high-level training and competitive environments, providing uniform illumination with optimal glare reduction.',
+    imageUrl: '/images/products/sports-field-lighting.jpg',
+    images: '["/images/products/sports-field-lighting.jpg", "/images/products/catalog/sports-field-lighting-sheet.jpg"]',
+    techInfo: 'High-Lumen Output LED Technology • Precision Glare-Controlled Optics • Corrosion-Resistant Powder Coating • Smart Remote Control Options • Multiple Fixture Configurations • Rugged Lattice & Tubular Construction',
+    sortOrder: 4,
+  },
+];
+
 async function getHomepageData() {
   try {
     const [settings, sections, sectors, products, values, partners, testimonials] = await Promise.all([
@@ -220,9 +284,25 @@ async function getHomepageData() {
       prisma.partner.findMany({ where: { enabled: true }, orderBy: { sortOrder: 'asc' } }),
       prisma.testimonial.findMany({ where: { enabled: true }, orderBy: { sortOrder: 'asc' } }),
     ]);
-    return { settings, sections, sectors, products, values, partners, testimonials };
+    return {
+      settings,
+      sections,
+      sectors: sectors.length > 0 ? sectors : DEFAULT_SECTORS,
+      products: products.length > 0 ? products : DEFAULT_PRODUCTS,
+      values,
+      partners,
+      testimonials,
+    };
   } catch {
-    return { settings: null, sections: [], sectors: [], products: [], values: [], partners: [], testimonials: [] };
+    return {
+      settings: null,
+      sections: [],
+      sectors: DEFAULT_SECTORS,
+      products: DEFAULT_PRODUCTS,
+      values: [],
+      partners: [],
+      testimonials: [],
+    };
   }
 }
 
@@ -273,7 +353,7 @@ export default async function HomePage() {
           subtitle={hero?.subtitle || ''}
           ctaText={hero?.ctaText || settings?.primaryCtaText || 'PARTNER WITH BEKUR'}
           ctaLink={hero?.ctaLink || 'whatsapp'}
-          imageUrl={hero?.imageUrl || ''}
+          imageUrl={hero?.imageUrl || '/images/hero-infrastructure.jpg'}
           whatsappNumber={whatsappNumber}
           whatsappMessage={whatsappMessage}
           secondaryCtaText={settings?.secondaryCtaText || 'EXPLORE OUR BUSINESS'}
@@ -286,7 +366,7 @@ export default async function HomePage() {
           content={intro?.content || ''}
           ctaText={intro?.ctaText || 'DISCOVER BEKUR'}
           ctaLink={intro?.ctaLink || '/about'}
-          imageUrl={intro?.imageUrl || ''}
+          imageUrl={intro?.imageUrl || '/images/company-intro.jpg'}
         />
       )}
 
@@ -371,7 +451,7 @@ export default async function HomePage() {
           content={futureSection?.content || ''}
           highlights={futureData.highlights || []}
           closingStatement={futureData.closingStatement || ''}
-          imageUrl={futureSection?.imageUrl || ''}
+          imageUrl={futureSection?.imageUrl || '/images/future-expansion.jpg'}
         />
       )}
 

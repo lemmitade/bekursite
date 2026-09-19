@@ -29,6 +29,17 @@ const sectorColors = [
   'linear-gradient(135deg, #132640 0%, #0B1F3A 100%)',
 ];
 
+const DEFAULT_SECTOR_IMAGES: Record<string, string> = {
+  'infrastructure-solutions': '/images/sectors/infrastructure-solutions.jpg',
+  'lighting-technologies': '/images/sectors/lighting-technologies.jpg',
+  'urban-development': '/images/sectors/urban-development.jpg',
+  'smart-city-technologies': '/images/sectors/smart-city-technologies.jpg',
+  'coffee-trading-export': '/images/sectors/coffee-trading-export.jpg',
+  'procurement-supply': '/images/sectors/procurement-supply.jpg',
+  'entertainment-recreation': '/images/sectors/entertainment-recreation.jpg',
+  'strategic-investments': '/images/sectors/strategic-investments.jpg',
+};
+
 export default function SectorsGrid({ title, subtitle, sectors }: SectorsGridProps) {
   useScrollReveal();
 
@@ -42,15 +53,17 @@ export default function SectorsGrid({ title, subtitle, sectors }: SectorsGridPro
         </div>
       </div>
       <div className="sectors-grid reveal">
-        {sectors.map((sector, i) => (
-          <Link href={`/sectors/${sector.slug}`} key={sector.id} className="sector-card">
-            <div className="sector-card__image">
-              {sector.imageUrl ? (
-                <img src={sector.imageUrl} alt={sector.title} loading="lazy" />
-              ) : (
-                <div style={{ width: '100%', height: '100%', background: sectorColors[i % sectorColors.length] }} />
-              )}
-            </div>
+        {sectors.map((sector, i) => {
+          const imgSrc = sector.imageUrl || DEFAULT_SECTOR_IMAGES[sector.slug];
+          return (
+            <Link href={`/sectors/${sector.slug}`} key={sector.id} className="sector-card">
+              <div className="sector-card__image">
+                {imgSrc ? (
+                  <img src={imgSrc} alt={sector.title} loading="lazy" />
+                ) : (
+                  <div style={{ width: '100%', height: '100%', background: sectorColors[i % sectorColors.length] }} />
+                )}
+              </div>
             <div className="sector-card__overlay" />
             <div className="sector-card__content">
               <span className="sector-card__number">{String(i + 1).padStart(2, '0')}</span>
@@ -62,7 +75,8 @@ export default function SectorsGrid({ title, subtitle, sectors }: SectorsGridPro
               </span>
             </div>
           </Link>
-        ))}
+          );
+        })}
       </div>
     </section>
   );

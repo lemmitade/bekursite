@@ -10,6 +10,20 @@ interface Partner {
   website: string;
 }
 
+const DEFAULT_PARTNER_LOGOS: Record<string, string> = {
+  'sa bamboo': '/images/partners/sa-bamboo.png',
+  'green soul': '/images/partners/green-soul.png',
+};
+
+function getPartnerLogo(partner: { name: string; logoUrl?: string }) {
+  if (partner.logoUrl) return partner.logoUrl;
+  const lower = partner.name.toLowerCase();
+  for (const [k, v] of Object.entries(DEFAULT_PARTNER_LOGOS)) {
+    if (lower.includes(k)) return v;
+  }
+  return '';
+}
+
 export default function PartnershipsSection({ title, subtitle, partners }: { title: string; subtitle: string; partners: Partner[] }) {
   useScrollReveal();
 
@@ -22,15 +36,17 @@ export default function PartnershipsSection({ title, subtitle, partners }: { tit
           {subtitle && <p className="body-lg mt-4 mx-auto" style={{ maxWidth: '600px' }}>{subtitle}</p>}
         </div>
         <div style={{ display: 'grid', gap: 'var(--space-6)', maxWidth: '900px', margin: '0 auto' }}>
-          {partners.map((partner, i) => (
-            <div key={partner.id} className={`partner-card reveal reveal--delay-${i + 1}`}>
-              <div className="partner-card__logo">
-                {partner.logoUrl ? (
-                  <img src={partner.logoUrl} alt={partner.name} />
-                ) : (
-                  partner.name.split(' ').map(w => w[0]).join('').slice(0, 2)
-                )}
-              </div>
+          {partners.map((partner, i) => {
+            const logo = getPartnerLogo(partner);
+            return (
+              <div key={partner.id} className={`partner-card reveal reveal--delay-${i + 1}`}>
+                <div className="partner-card__logo">
+                  {logo ? (
+                    <img src={logo} alt={partner.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                  ) : (
+                    partner.name.split(' ').map(w => w[0]).join('').slice(0, 2)
+                  )}
+                </div>
               <div>
                 <h3 className="h3">{partner.name}</h3>
                 <p className="body-sm mt-4" style={{ lineHeight: 1.7 }}>{partner.description}</p>
@@ -42,7 +58,8 @@ export default function PartnershipsSection({ title, subtitle, partners }: { tit
                 )}
               </div>
             </div>
-          ))}
+          );
+        })}
         </div>
       </div>
     </section>

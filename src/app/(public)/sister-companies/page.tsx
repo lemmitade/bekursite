@@ -187,6 +187,7 @@ export default async function SisterCompaniesPage() {
         <div className="container" style={{ maxWidth: '1200px', margin: '0 auto', display: 'grid', gap: 'var(--space-16)' }}>
           {companies.map((company, index) => {
             const isEven = index % 2 === 0;
+            const companyImg = company.imageUrl || (company.slug === 'kebron-coffee' ? '/images/companies/kebron-coffee.jpg' : company.slug === 'kebron-light' ? '/images/companies/kebron-light.jpg' : '/images/companies/kebron-skate.jpg');
             const specialties = COMPANY_SPECIALTIES[company.slug] || [
               '⭐ Premium Quality Standards',
               '🏆 Proven Operational Reliability',
@@ -227,7 +228,7 @@ export default async function SisterCompaniesPage() {
                   }}
                 >
                   <img
-                    src={company.imageUrl}
+                    src={companyImg}
                     alt={company.name}
                     style={{
                       width: '100%',

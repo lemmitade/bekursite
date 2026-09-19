@@ -11,6 +11,14 @@ export const metadata: Metadata = {
     description: 'Infrastructure, Technology & Sustainable Solutions for a Changing Ethiopia',
     type: 'website',
   },
+  icons: {
+    icon: [
+      { url: '/favicon.ico', sizes: '32x32' },
+      { url: '/images/logo.png', sizes: '192x192', type: 'image/png' },
+    ],
+    shortcut: '/favicon.ico',
+    apple: '/images/logo.png',
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

@@ -252,7 +252,8 @@ h4,.h4 { font-family: var(--font-heading); font-size: var(--text-xl); font-weigh
 /* Partnerships */
 .partner-card { display: grid; grid-template-columns: auto 1fr; gap: var(--space-8); padding: var(--space-10); background: var(--card-bg); border: 1px solid var(--card-border); align-items: start; transition: border-color var(--transition-base); }
 .partner-card:hover { border-color: var(--gold); }
-.partner-card__logo { width: 80px; height: 80px; background: var(--bg-secondary); border: 1px solid var(--border-color); display: flex; align-items: center; justify-content: center; font-family: var(--font-heading); font-size: var(--text-xl); font-weight: 700; color: var(--gold); overflow: hidden; }
+.partner-card__logo { width: 80px; height: 80px; background: var(--bg-secondary); border: 1px solid var(--border-color); display: flex; align-items: center; justify-content: center; font-family: var(--font-heading); font-size: var(--text-xl); font-weight: 700; color: var(--gold); overflow: hidden; border-radius: var(--radius-md); }
+.partner-card__logo img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
 /* Testimonials */
 .testimonial-card { text-align: center; max-width: 700px; margin: 0 auto; padding: var(--space-16) 0; }

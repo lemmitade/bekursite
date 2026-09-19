@@ -17,6 +17,25 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   }
 }
 
+const DEFAULT_SECTOR_IMAGES: Record<string, string> = {
+  'infrastructure-solutions': '/images/sectors/infrastructure-solutions.jpg',
+  'lighting-technologies': '/images/sectors/lighting-technologies.jpg',
+  'urban-development': '/images/sectors/urban-development.jpg',
+  'smart-city-technologies': '/images/sectors/smart-city-technologies.jpg',
+  'coffee-trading-export': '/images/sectors/coffee-trading-export.jpg',
+  'procurement-supply': '/images/sectors/procurement-supply.jpg',
+  'entertainment-recreation': '/images/sectors/entertainment-recreation.jpg',
+  'strategic-investments': '/images/sectors/strategic-investments.jpg',
+};
+
+const DEFAULT_PRODUCT_IMAGES: Record<string, string> = {
+  'smart-pole-solutions': '/images/products/smart-pole.jpg',
+  'garden-pole-systems': '/images/products/garden-pole.jpg',
+  'charger-box-stations': '/images/products/charger-box.jpg',
+  'high-mast-lighting': '/images/products/high-mast-lighting.jpg',
+  'sports-field-lighting': '/images/products/sports-field-lighting.jpg',
+};
+
 export default async function SectorDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   let sector;
@@ -32,6 +51,8 @@ export default async function SectorDetailPage({ params }: { params: Promise<{ s
   } catch {}
 
   if (!sector) notFound();
+
+  const sectorImg = sector.imageUrl || DEFAULT_SECTOR_IMAGES[sector.slug];
 
   return (
     <>
@@ -60,8 +81,8 @@ export default async function SectorDetailPage({ params }: { params: Promise<{ s
             </div>
             <div>
               <div className="intro__image-wrapper">
-                {sector.imageUrl ? (
-                  <img src={sector.imageUrl} alt={sector.title} />
+                {sectorImg ? (
+                  <img src={sectorImg} alt={sector.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                 ) : (
                   <div style={{
                     width: '100%', height: '100%',
@@ -86,32 +107,35 @@ export default async function SectorDetailPage({ params }: { params: Promise<{ s
               <h2>Solutions in This Sector</h2>
             </div>
             <div style={{ display: 'grid', gap: 'var(--space-6)' }}>
-              {products.map(product => (
-                <Link href={`/solutions/${product.slug}`} key={product.id} className="product-card">
-                  <div className="product-card__image">
-                    {product.imageUrl ? (
-                      <img
-                        src={product.imageUrl}
-                        alt={product.name}
-                        style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                      />
-                    ) : (
-                      <div style={{
-                        width: '100%', height: '100%',
-                        background: 'linear-gradient(135deg, #0B1F3A, #132640)',
-                        display: 'flex', alignItems: 'center', justifyContent: 'center',
-                        color: 'rgba(243,188,62,0.2)',
-                        fontFamily: 'var(--font-heading)', fontSize: '2rem', fontWeight: 600,
-                      }}>{product.name}</div>
-                    )}
-                  </div>
-                  <div className="product-card__body">
-                    <span className="label">Product</span>
-                    <h3>{product.name}</h3>
-                    <p className="body-sm mt-4">{product.description}</p>
-                  </div>
-                </Link>
-              ))}
+              {products.map(product => {
+                const prodImg = product.imageUrl || DEFAULT_PRODUCT_IMAGES[product.slug];
+                return (
+                  <Link href={`/solutions/${product.slug}`} key={product.id} className="product-card">
+                    <div className="product-card__image">
+                      {prodImg ? (
+                        <img
+                          src={prodImg}
+                          alt={product.name}
+                          style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                        />
+                      ) : (
+                        <div style={{
+                          width: '100%', height: '100%',
+                          background: 'linear-gradient(135deg, #0B1F3A, #132640)',
+                          display: 'flex', alignItems: 'center', justifyContent: 'center',
+                          color: 'rgba(243,188,62,0.2)',
+                          fontFamily: 'var(--font-heading)', fontSize: '2rem', fontWeight: 600,
+                        }}>{product.name}</div>
+                      )}
+                    </div>
+                    <div className="product-card__body">
+                      <span className="label">Product</span>
+                      <h3>{product.name}</h3>
+                      <p className="body-sm mt-4">{product.description}</p>
+                    </div>
+                  </Link>
+                );
+              })}
             </div>
           </div>
         </section>

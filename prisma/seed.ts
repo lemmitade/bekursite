@@ -519,11 +519,13 @@ async function main() {
     {
       name: 'SA Bamboo PLC',
       description: 'Bekur General Trading PLC proudly collaborates with SA Bamboo PLC, a recognized leader in sustainable manufacturing and innovative bamboo-based infrastructure solutions. The partnership supports environmentally responsible development and durable sustainable products for modern infrastructure projects.',
+      logoUrl: '/images/partners/sa-bamboo.png',
       sortOrder: 0,
     },
     {
       name: 'Green Soul Trading PLC',
       description: 'Green Soul Trading PLC shares our commitment to innovation, sustainability, and long-term value creation. Through this partnership, Bekur expands access to advanced technologies and sustainable infrastructure solutions that improve communities and support economic development.',
+      logoUrl: '/images/partners/green-soul.png',
       sortOrder: 1,
     },
   ];
@@ -532,7 +534,12 @@ async function main() {
     const existing = await prisma.partner.findFirst({
       where: { name: partner.name },
     });
-    if (!existing) {
+    if (existing) {
+      await prisma.partner.update({
+        where: { id: existing.id },
+        data: { logoUrl: partner.logoUrl, description: partner.description },
+      });
+    } else {
       await prisma.partner.create({ data: partner });
     }
   }

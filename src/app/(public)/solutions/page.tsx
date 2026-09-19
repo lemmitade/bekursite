@@ -7,6 +7,14 @@ export const metadata: Metadata = {
   description: 'Explore Bekur\'s innovative product portfolio: smart poles, garden lighting, EV charger stations, high mast lighting, and sports field lighting for modern infrastructure.',
 };
 
+const DEFAULT_PRODUCT_IMAGES: Record<string, string> = {
+  'smart-pole-solutions': '/images/products/smart-pole.jpg',
+  'garden-pole-systems': '/images/products/garden-pole.jpg',
+  'charger-box-stations': '/images/products/charger-box.jpg',
+  'high-mast-lighting': '/images/products/high-mast-lighting.jpg',
+  'sports-field-lighting': '/images/products/sports-field-lighting.jpg',
+};
+
 const productCatalogSheets: Record<string, string> = {
   'smart-pole-solutions': '/images/products/catalog/smart-pole-sheet.jpg',
   'garden-pole-systems': '/images/products/catalog/garden-pole-sheet.jpg',
@@ -52,11 +60,12 @@ export default async function SolutionsPage() {
           <div style={{ display: 'grid', gap: 'var(--space-12)' }}>
             {products.map((product, i) => {
               const sheetUrl = productCatalogSheets[product.slug];
+              const imgSrc = product.imageUrl || DEFAULT_PRODUCT_IMAGES[product.slug];
               return (
                 <div key={product.id} className="product-card" style={{ borderRadius: 'var(--radius-md)', overflow: 'hidden' }}>
                   <div className="product-card__image" style={{ position: 'relative' }}>
-                    {product.imageUrl ? (
-                      <img src={product.imageUrl} alt={product.name} loading="lazy" />
+                    {imgSrc ? (
+                      <img src={imgSrc} alt={product.name} loading="lazy" />
                     ) : (
                       <div style={{
                         width: '100%', height: '100%',

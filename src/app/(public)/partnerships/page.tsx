@@ -6,6 +6,20 @@ export const metadata: Metadata = {
   description: 'Discover Bekur\'s strategic partnerships with SA Bamboo PLC, Green Soul Trading PLC, and other organizations driving sustainable development.',
 };
 
+const DEFAULT_PARTNER_LOGOS: Record<string, string> = {
+  'sa bamboo': '/images/partners/sa-bamboo.png',
+  'green soul': '/images/partners/green-soul.png',
+};
+
+function getPartnerLogo(partner: { name: string; logoUrl?: string }) {
+  if (partner.logoUrl) return partner.logoUrl;
+  const lower = partner.name.toLowerCase();
+  for (const [k, v] of Object.entries(DEFAULT_PARTNER_LOGOS)) {
+    if (lower.includes(k)) return v;
+  }
+  return '';
+}
+
 export default async function PartnershipsPage() {
   let partners: any[] = [];
   let testimonials: any[] = [];
@@ -31,26 +45,29 @@ export default async function PartnershipsPage() {
       <section className="section">
         <div className="container container--content">
           <div style={{ display: 'grid', gap: 'var(--space-8)' }}>
-            {partners.map(partner => (
-              <div key={partner.id} className="partner-card">
-                <div className="partner-card__logo">
-                  {partner.logoUrl ? (
-                    <img src={partner.logoUrl} alt={partner.name} />
-                  ) : (
-                    partner.name.split(' ').map((w: string) => w[0]).join('').slice(0, 2)
-                  )}
+            {partners.map(partner => {
+              const logo = getPartnerLogo(partner);
+              return (
+                <div key={partner.id} className="partner-card">
+                  <div className="partner-card__logo">
+                    {logo ? (
+                      <img src={logo} alt={partner.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                    ) : (
+                      partner.name.split(' ').map((w: string) => w[0]).join('').slice(0, 2)
+                    )}
+                  </div>
+                  <div>
+                    <h3 className="h3">{partner.name}</h3>
+                    <p className="body-sm mt-4" style={{ lineHeight: 1.7 }}>{partner.description}</p>
+                    {partner.website && (
+                      <a href={partner.website} target="_blank" rel="noopener noreferrer" className="btn btn--secondary mt-6" style={{ fontSize: 'var(--text-xs)' }}>
+                        Visit Website →
+                      </a>
+                    )}
+                  </div>
                 </div>
-                <div>
-                  <h3 className="h3">{partner.name}</h3>
-                  <p className="body-sm mt-4" style={{ lineHeight: 1.7 }}>{partner.description}</p>
-                  {partner.website && (
-                    <a href={partner.website} target="_blank" rel="noopener noreferrer" className="btn btn--secondary mt-6" style={{ fontSize: 'var(--text-xs)' }}>
-                      Visit Website →
-                    </a>
-                  )}
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
