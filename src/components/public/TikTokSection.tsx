@@ -31,6 +31,12 @@ function extractTikTokId(url?: string): string | null {
   return match ? match[1] : null;
 }
 
+function extractVimeoId(url?: string): string | null {
+  if (!url) return null;
+  const match = url.match(/vimeo\.com\/(?:video\/)?(\d+)/);
+  return match ? match[1] : null;
+}
+
 export default function TikTokSection({
   title = 'BEKUR ON TIKTOK',
   subtitle = 'Behind-the-scenes engineering, live on-site testing, and short-form tech highlights. Tap any reel for an interactive preview.',
@@ -72,7 +78,8 @@ export default function TikTokSection({
     setLikedMap((prev) => ({ ...prev, [id]: !prev[id] }));
   };
 
-  const activeTikTokId = activeReel ? extractTikTokId(activeReel.tiktokUrl) : null;
+  const activeTikTokId = activeReel ? extractTikTokId(activeReel.tiktokUrl || activeReel.videoUrl) : null;
+  const activeVimeoId = activeReel ? extractVimeoId(activeReel.videoUrl || activeReel.tiktokUrl) : null;
 
   return (
     <section className="section tiktok-section" id="tiktok-reels">
@@ -235,7 +242,7 @@ export default function TikTokSection({
               ✕
             </button>
 
-            {/* Vertical Player: TikTok Embed or HTML5 */}
+            {/* Vertical Player: TikTok Embed, Vimeo, or HTML5 */}
             {activeTikTokId ? (
               <div className="video-modal__player-wrap video-modal__player-wrap--tiktok" style={{ height: '560px', maxHeight: '72vh' }}>
                 <iframe
@@ -243,6 +250,16 @@ export default function TikTokSection({
                   title={activeReel.title}
                   style={{ width: '100%', height: '100%', border: 'none' }}
                   allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
+              </div>
+            ) : activeVimeoId ? (
+              <div className="video-modal__player-wrap video-modal__player-wrap--tiktok" style={{ height: '560px', maxHeight: '72vh', background: '#000' }}>
+                <iframe
+                  src={`https://player.vimeo.com/video/${activeVimeoId}?autoplay=1&title=0&byline=0&portrait=0`}
+                  title={activeReel.title}
+                  style={{ width: '100%', height: '100%', border: 'none' }}
+                  allow="autoplay; fullscreen; picture-in-picture"
                   allowFullScreen
                 />
               </div>
