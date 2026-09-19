@@ -33,30 +33,95 @@ interface TikTokItem {
 
 const DEFAULT_PRODUCTION_VIDEOS: VideoItem[] = [
   {
-    id: 'vid-1',
-    title: 'Precision Laser Cutting & Metal Fabrication',
+    id: 'vid-prod-vimeo-1',
+    title: 'Illumination Assembly & Baseplate Welding',
     category: 'production',
-    description: 'High-precision automated CNC laser cutting of heavy-duty structural steel components for our smart poles and stadium floodlight towers.',
-    videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4',
-    thumbnailUrl: '/images/videos/production-fabrication.jpg',
-    duration: '01:24',
-    location: 'Bekur Engineering Plant, Addis Ababa',
-    badge: 'Manufacturing',
+    description: 'Precision welding and assembly of custom geometric LED street lighting columns with live lighting test strips.',
+    videoUrl: 'https://vimeo.com/1228309071',
+    thumbnailUrl: '/images/videos/vimeo-1228309071.jpg',
+    duration: '00:21',
+    location: 'Bekur Metal Fabrication Plant',
+    badge: 'Welding & Fitting',
     enabled: true,
     sortOrder: 0,
   },
   {
-    id: 'vid-2',
-    title: 'Smart City Lighting Assembly & Sensor Testing',
+    id: 'vid-prod-vimeo-2',
+    title: 'Structural Steel Column Fabrication & Joinery',
     category: 'production',
-    description: 'Clean-room calibration of IoT environmental sensors, integrated solar panels, and high-efficiency LED controllers.',
-    videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4',
-    thumbnailUrl: '/images/videos/production-assembly.jpg',
-    duration: '02:10',
-    location: 'Electronics & Quality Lab',
-    badge: 'Engineering',
+    description: 'Heavy-duty arc welding and alignment of tubular steel pole columns built to withstand severe wind and weather loads.',
+    videoUrl: 'https://vimeo.com/1228309073',
+    thumbnailUrl: '/images/videos/vimeo-1228309073.jpg',
+    duration: '00:15',
+    location: 'Bekur Engineering Workshop',
+    badge: 'Structural Steel',
     enabled: true,
     sortOrder: 1,
+  },
+  {
+    id: 'vid-prod-vimeo-3',
+    title: 'High-Amperage Arc Welding of Heavy Baseplates',
+    category: 'production',
+    description: 'Artisan close-up electric arc welding reinforcing structural foundation baseplates and mounting anchor gussets.',
+    videoUrl: 'https://vimeo.com/1228309074',
+    thumbnailUrl: '/images/videos/vimeo-1228309074.jpg',
+    duration: '00:02',
+    location: 'Bekur Metal Plant',
+    badge: 'Arc Welding',
+    enabled: true,
+    sortOrder: 2,
+  },
+  {
+    id: 'vid-prod-vimeo-4',
+    title: 'CNC Geometric Lighting Arm Profiles & Channels',
+    category: 'production',
+    description: 'Finished angular steel arm channels precision-cut and fitted with interior conduits for LED diffusers and weather-sealed wiring.',
+    videoUrl: 'https://vimeo.com/1228309128',
+    thumbnailUrl: '/images/videos/vimeo-1228309128.jpg',
+    duration: '00:05',
+    location: 'Bekur Fabrication Facility',
+    badge: 'CNC Fabrication',
+    enabled: true,
+    sortOrder: 3,
+  },
+  {
+    id: 'vid-prod-vimeo-5',
+    title: 'Finished Powder-Coated Poles & Quality Inspection',
+    category: 'production',
+    description: 'Comprehensive batch inspection, dimension verification, and quality audit of powder-coated architectural street lighting poles.',
+    videoUrl: 'https://vimeo.com/1228309127',
+    thumbnailUrl: '/images/videos/vimeo-1228309127.jpg',
+    duration: '00:06',
+    location: 'Assembly & Quality Yard',
+    badge: 'Quality Inspection',
+    enabled: true,
+    sortOrder: 4,
+  },
+  {
+    id: 'vid-prod-vimeo-6',
+    title: 'Logistics Dispatch & On-Site Project Delivery',
+    category: 'production',
+    description: 'Protective film wrapping and careful vehicle loading of custom fabricated lighting poles ready for installation delivery.',
+    videoUrl: 'https://vimeo.com/1228309195',
+    thumbnailUrl: '/images/videos/vimeo-1228309195.jpg',
+    duration: '00:39',
+    location: 'Bekur Dispatch Bay, Addis Ababa',
+    badge: 'Dispatch & Delivery',
+    enabled: true,
+    sortOrder: 5,
+  },
+  {
+    id: 'vid-prod-vimeo-7',
+    title: 'Final Finishing & Luminaire Component Assembly',
+    category: 'production',
+    description: 'Assembly of electrical luminaire fixtures, optical lenses, and quality assurance testing before site shipment.',
+    videoUrl: 'https://vimeo.com/1228309075',
+    thumbnailUrl: '/images/videos/vimeo-1228309075.jpg',
+    duration: '00:15',
+    location: 'Bekur Plant',
+    badge: 'Assembly & QC',
+    enabled: true,
+    sortOrder: 6,
   },
   {
     id: 'vid-res-vimeo-1',
@@ -69,7 +134,7 @@ const DEFAULT_PRODUCTION_VIDEOS: VideoItem[] = [
     location: 'Addis Ababa Urban Project',
     badge: 'Smart Lighting',
     enabled: true,
-    sortOrder: 2,
+    sortOrder: 7,
   },
   {
     id: 'vid-res-vimeo-2',
@@ -82,7 +147,7 @@ const DEFAULT_PRODUCTION_VIDEOS: VideoItem[] = [
     location: 'Commercial & Hospitality Grounds',
     badge: 'Walkway Project',
     enabled: true,
-    sortOrder: 3,
+    sortOrder: 8,
   },
   {
     id: 'vid-res-vimeo-3',
@@ -95,7 +160,7 @@ const DEFAULT_PRODUCTION_VIDEOS: VideoItem[] = [
     location: 'City Boulevard Infrastructure',
     badge: 'Live Testing',
     enabled: true,
-    sortOrder: 4,
+    sortOrder: 9,
   },
   {
     id: 'vid-res-vimeo-4',
@@ -108,7 +173,7 @@ const DEFAULT_PRODUCTION_VIDEOS: VideoItem[] = [
     location: 'Bekur Fabrication Facility',
     badge: 'Quality Verified',
     enabled: true,
-    sortOrder: 5,
+    sortOrder: 10,
   },
   {
     id: 'vid-res-vimeo-5',
@@ -121,7 +186,7 @@ const DEFAULT_PRODUCTION_VIDEOS: VideoItem[] = [
     location: 'Addis Ababa',
     badge: 'Luminous Test',
     enabled: true,
-    sortOrder: 6,
+    sortOrder: 11,
   },
 ];
 
@@ -217,6 +282,7 @@ export default function AdminVideosPage() {
   const [ttVideos, setTtVideos] = useState<TikTokItem[]>(DEFAULT_TIKTOK_VIDEOS);
   const [editingTikTok, setEditingTikTok] = useState<TikTokItem | null>(null);
   const [isNewTikTok, setIsNewTikTok] = useState(false);
+  const [modalSaving, setModalSaving] = useState(false);
   const [uploading, setUploading] = useState<string | null>(null);
   const prodVideoFileRef = useRef<HTMLInputElement>(null);
   const prodThumbFileRef = useRef<HTMLInputElement>(null);
@@ -309,7 +375,7 @@ export default function AdminVideosPage() {
         }),
       });
       if (!res.ok) throw new Error('Failed to save');
-      setMessage({ type: 'success', text: 'Production & Results videos saved successfully!' });
+      setMessage({ type: 'success', text: 'Production & Results videos saved successfully to database!' });
     } catch {
       setMessage({ type: 'error', text: 'Failed to save Production videos.' });
     } finally {
@@ -338,7 +404,7 @@ export default function AdminVideosPage() {
         }),
       });
       if (!res.ok) throw new Error('Failed to save');
-      setMessage({ type: 'success', text: 'TikTok videos & configuration saved successfully!' });
+      setMessage({ type: 'success', text: 'TikTok videos & configuration saved successfully to database!' });
     } catch {
       setMessage({ type: 'error', text: 'Failed to save TikTok section.' });
     } finally {
@@ -346,38 +412,167 @@ export default function AdminVideosPage() {
     }
   };
 
-  const handleDeleteVideo = (id: string) => {
-    if (confirm('Are you sure you want to delete this video?')) {
-      setProdVideos((prev) => prev.filter((v) => v.id !== id));
+  const handleDeleteVideo = async (id: string) => {
+    if (!confirm('Are you sure you want to delete this video?')) return;
+    const updated = prodVideos.filter((v) => v.id !== id);
+    setProdVideos(updated);
+    try {
+      await fetch('/api/admin/videos', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          sectionKey: 'production_videos',
+          title: prodTitle,
+          subtitle: prodSubtitle,
+          enabled: prodEnabled,
+          extraData: JSON.stringify({ videos: updated }),
+        }),
+      });
+      setMessage({ type: 'success', text: 'Video deleted and changes saved to database!' });
+    } catch {
+      setMessage({ type: 'error', text: 'Failed to update database after delete.' });
     }
   };
 
-  const handleDeleteTikTok = (id: string) => {
-    if (confirm('Are you sure you want to delete this TikTok reel?')) {
-      setTtVideos((prev) => prev.filter((t) => t.id !== id));
+  const handleDeleteTikTok = async (id: string) => {
+    if (!confirm('Are you sure you want to delete this TikTok reel?')) return;
+    const updated = ttVideos.filter((t) => t.id !== id);
+    setTtVideos(updated);
+    try {
+      await fetch('/api/admin/videos', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          sectionKey: 'tiktok_videos',
+          title: ttTitle,
+          subtitle: ttSubtitle,
+          enabled: ttEnabled,
+          extraData: JSON.stringify({
+            accountHandle: ttHandle,
+            accountUrl: ttAccountUrl,
+            followerCount: ttFollowers,
+            videos: updated,
+          }),
+        }),
+      });
+      setMessage({ type: 'success', text: 'TikTok reel deleted and changes saved to database!' });
+    } catch {
+      setMessage({ type: 'error', text: 'Failed to update database after delete.' });
     }
   };
 
-  const handleSaveVideoModal = (e: React.FormEvent) => {
+  const handleToggleVideo = async (id: string, enabled: boolean) => {
+    const updated = prodVideos.map((v) => (v.id === id ? { ...v, enabled } : v));
+    setProdVideos(updated);
+    try {
+      await fetch('/api/admin/videos', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          sectionKey: 'production_videos',
+          title: prodTitle,
+          subtitle: prodSubtitle,
+          enabled: prodEnabled,
+          extraData: JSON.stringify({ videos: updated }),
+        }),
+      });
+      setMessage({ type: 'success', text: `Video visibility updated to ${enabled ? 'Active' : 'Hidden'} and saved!` });
+    } catch {
+      setMessage({ type: 'error', text: 'Failed to update visibility in database.' });
+    }
+  };
+
+  const handleToggleTikTok = async (id: string, enabled: boolean) => {
+    const updated = ttVideos.map((t) => (t.id === id ? { ...t, enabled } : t));
+    setTtVideos(updated);
+    try {
+      await fetch('/api/admin/videos', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          sectionKey: 'tiktok_videos',
+          title: ttTitle,
+          subtitle: ttSubtitle,
+          enabled: ttEnabled,
+          extraData: JSON.stringify({
+            accountHandle: ttHandle,
+            accountUrl: ttAccountUrl,
+            followerCount: ttFollowers,
+            videos: updated,
+          }),
+        }),
+      });
+      setMessage({ type: 'success', text: `TikTok reel visibility updated to ${enabled ? 'Active' : 'Hidden'} and saved!` });
+    } catch {
+      setMessage({ type: 'error', text: 'Failed to update visibility in database.' });
+    }
+  };
+
+  const handleSaveVideoModal = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!editingVideo) return;
-    if (isNewVideo) {
-      setProdVideos((prev) => [...prev, editingVideo]);
-    } else {
-      setProdVideos((prev) => prev.map((v) => (v.id === editingVideo.id ? editingVideo : v)));
+    setModalSaving(true);
+    const updated = isNewVideo
+      ? [...prodVideos, editingVideo]
+      : prodVideos.map((v) => (v.id === editingVideo.id ? editingVideo : v));
+
+    try {
+      const res = await fetch('/api/admin/videos', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          sectionKey: 'production_videos',
+          title: prodTitle,
+          subtitle: prodSubtitle,
+          enabled: prodEnabled,
+          extraData: JSON.stringify({ videos: updated }),
+        }),
+      });
+      if (!res.ok) throw new Error('Failed to save video to database');
+      setProdVideos(updated);
+      setEditingVideo(null);
+      setMessage({ type: 'success', text: `Video "${editingVideo.title || 'Untitled'}" saved & published to live database!` });
+    } catch (err: any) {
+      setMessage({ type: 'error', text: err.message || 'Failed to save video to database' });
+    } finally {
+      setModalSaving(false);
     }
-    setEditingVideo(null);
   };
 
-  const handleSaveTikTokModal = (e: React.FormEvent) => {
+  const handleSaveTikTokModal = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!editingTikTok) return;
-    if (isNewTikTok) {
-      setTtVideos((prev) => [...prev, editingTikTok]);
-    } else {
-      setTtVideos((prev) => prev.map((t) => (t.id === editingTikTok.id ? editingTikTok : t)));
+    setModalSaving(true);
+    const updated = isNewTikTok
+      ? [...ttVideos, editingTikTok]
+      : ttVideos.map((t) => (t.id === editingTikTok.id ? editingTikTok : t));
+
+    try {
+      const res = await fetch('/api/admin/videos', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          sectionKey: 'tiktok_videos',
+          title: ttTitle,
+          subtitle: ttSubtitle,
+          enabled: ttEnabled,
+          extraData: JSON.stringify({
+            accountHandle: ttHandle,
+            accountUrl: ttAccountUrl,
+            followerCount: ttFollowers,
+            videos: updated,
+          }),
+        }),
+      });
+      if (!res.ok) throw new Error('Failed to save TikTok reel to database');
+      setTtVideos(updated);
+      setEditingTikTok(null);
+      setMessage({ type: 'success', text: `TikTok reel "${editingTikTok.title || 'Untitled'}" saved & published to live database!` });
+    } catch (err: any) {
+      setMessage({ type: 'error', text: err.message || 'Failed to save TikTok reel to database' });
+    } finally {
+      setModalSaving(false);
     }
-    setEditingTikTok(null);
   };
 
   if (loading) {
@@ -386,12 +581,23 @@ export default function AdminVideosPage() {
 
   return (
     <div>
-      <div className="admin-header">
+      <div className="admin-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 'var(--space-4)' }}>
         <div>
           <h1 className="admin-header__title">Video & TikTok Management</h1>
           <p style={{ color: 'var(--text-secondary)', fontSize: 'var(--text-sm)', marginTop: '4px' }}>
             Manage the Production Videos & Final Results showcase, and the interactive TikTok Reels on the public website.
           </p>
+        </div>
+        <div style={{ display: 'flex', gap: 'var(--space-3)' }}>
+          <button
+            type="button"
+            onClick={activeTab === 'production' ? handleSaveProduction : handleSaveTikTok}
+            disabled={saving}
+            className="btn btn--primary"
+            style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '10px 20px', fontSize: 'var(--text-sm)' }}
+          >
+            {saving ? 'Saving to Database...' : activeTab === 'production' ? '💾 Save Production Changes' : '💾 Save TikTok Changes'}
+          </button>
         </div>
       </div>
 
@@ -563,10 +769,7 @@ export default function AdminVideosPage() {
                     <input
                       type="checkbox"
                       checked={video.enabled}
-                      onChange={(e) => {
-                        const updated = prodVideos.map((v) => (v.id === video.id ? { ...v, enabled: e.target.checked } : v));
-                        setProdVideos(updated);
-                      }}
+                      onChange={(e) => handleToggleVideo(video.id, e.target.checked)}
                     />
                     {video.enabled ? 'Active' : 'Hidden'}
                   </label>
@@ -760,10 +963,7 @@ export default function AdminVideosPage() {
                       <input
                         type="checkbox"
                         checked={reel.enabled}
-                        onChange={(e) => {
-                          const updated = ttVideos.map((t) => (t.id === reel.id ? { ...t, enabled: e.target.checked } : t));
-                          setTtVideos(updated);
-                        }}
+                        onChange={(e) => handleToggleTikTok(reel.id, e.target.checked)}
                       />
                       {reel.enabled ? 'Active' : 'Hidden'}
                     </label>
@@ -970,7 +1170,9 @@ export default function AdminVideosPage() {
 
               <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 'var(--space-3)', marginTop: 'var(--space-6)' }}>
                 <button type="button" onClick={() => setEditingVideo(null)} className="btn btn--secondary">Cancel</button>
-                <button type="submit" className="btn btn--primary">Save Video</button>
+                <button type="submit" disabled={modalSaving} className="btn btn--primary">
+                  {modalSaving ? 'Saving to Database...' : '💾 Save & Publish'}
+                </button>
               </div>
             </form>
           </div>
@@ -1125,7 +1327,9 @@ export default function AdminVideosPage() {
 
               <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 'var(--space-3)', marginTop: 'var(--space-6)' }}>
                 <button type="button" onClick={() => setEditingTikTok(null)} className="btn btn--secondary">Cancel</button>
-                <button type="submit" className="btn btn--primary">Save TikTok Reel</button>
+                <button type="submit" disabled={modalSaving} className="btn btn--primary">
+                  {modalSaving ? 'Saving to Database...' : '💾 Save & Publish'}
+                </button>
               </div>
             </form>
           </div>
