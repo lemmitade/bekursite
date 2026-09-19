@@ -3,6 +3,7 @@ import './globals.css';
 import { ThemeProvider } from '@/components/ThemeProvider';
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://bekurgeneraltrading.com'),
   title: 'BEKUR General Trading PLC | Infrastructure, Technology & Sustainable Solutions',
   description: 'Bekur General Trading PLC is a diversified Ethiopian business group committed to infrastructure development, innovative technologies, sustainable business solutions, and strategic investments.',
   keywords: 'Bekur, infrastructure solutions Ethiopia, smart city technologies, lighting solutions, sustainable development, trading company Ethiopia',

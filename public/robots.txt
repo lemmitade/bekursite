@@ -3,4 +3,4 @@ Allow: /
 Disallow: /admin/
 Disallow: /api/admin/
 
-Sitemap: https://bekurtrading.com/sitemap.xml
+Sitemap: https://bekurgeneraltrading.com/sitemap.xml
