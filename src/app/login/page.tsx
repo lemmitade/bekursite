@@ -21,10 +21,15 @@ function LoginForm() {
     setError('');
     setLoading(true);
 
+    const cleanEmail = email.trim();
+    const cleanPassword = password.trim();
+
     try {
       const res = await signIn('credentials', {
-        email: email.trim(),
-        password,
+        email: cleanEmail,
+        password: cleanPassword,
+        callbackUrl,
+        redirectTo: callbackUrl,
         redirect: false,
       });
 
@@ -32,11 +37,17 @@ function LoginForm() {
         setError('Invalid email or password. Please try again.');
         setLoading(false);
       } else {
-        // Force full redirect so cookies and middleware sync seamlessly
-        window.location.href = callbackUrl;
+        // Force full page reload so session cookies and middleware sync seamlessly
+        const targetUrl = res?.url && !res.url.includes('/login') ? res.url : callbackUrl;
+        window.location.href = targetUrl;
       }
-    } catch {
-      setError('An unexpected error occurred. Please try again.');
+    } catch (err: any) {
+      console.error('Login error:', err);
+      if (err?.type === 'CredentialsSignin' || err?.message?.includes('CredentialsSignin')) {
+        setError('Invalid email or password. Please try again.');
+      } else {
+        setError('An unexpected error occurred. Please try again.');
+      }
       setLoading(false);
     }
   };
